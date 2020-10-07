@@ -6,10 +6,13 @@ import { Header, Loading } from '../components';
 import { FirebaseContext } from '../context/firebase';
 import * as ROUTES from '../constants/routes';
 import logo from '../logo.svg';
+import { FooterContainer } from './Footer';
 
 export default function BrowseContaier({ slides }) {
     const [profile, setProfile] = useState({});
     const [loading, setLoading] = useState(true);
+    const [searchTerm, setSearchTerm] = useState('');
+
     const { firebase } = useContext(FirebaseContext);
     const user = firebase.auth().currentUser || {};
 
@@ -42,6 +45,10 @@ export default function BrowseContaier({ slides }) {
                         <Header.TextLink>Films</Header.TextLink>
                     </Header.Group>
                     <Header.Group>
+                        <Header.Search
+                            searchTerm={searchTerm}
+                            setSearchTerm={setSearchTerm}
+                        />
                         <Header.Profile>
                             <Header.Picture src={user.photoURL} />
                             <Header.Dropdown>
@@ -75,8 +82,10 @@ export default function BrowseContaier({ slides }) {
                         dolorum aspernatur laboriosam voluptatem, voluptates a,
                         dolorem tempore fugiat.
                     </Header.Text>
+                    <Header.PlayButton>Play</Header.PlayButton>
                 </Header.Feature>
             </Header>
+            <FooterContainer />
         </>
     ) : (
         <SelectProfileContainer user={user} setProfile={setProfile} />
