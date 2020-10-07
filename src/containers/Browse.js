@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
 
 import { SelectProfileContainer } from './Profiles';
-import { Header, Loading } from '../components';
+import { Card, Header, Loading } from '../components';
 
 import { FirebaseContext } from '../context/firebase';
 import * as ROUTES from '../constants/routes';
@@ -12,6 +12,8 @@ export default function BrowseContaier({ slides }) {
     const [profile, setProfile] = useState({});
     const [loading, setLoading] = useState(true);
     const [searchTerm, setSearchTerm] = useState('');
+    const [category, setCategory] = useState('series');
+    const [slideRows, setSlideRows] = useState([]);
 
     const { firebase } = useContext(FirebaseContext);
     const user = firebase.auth().currentUser || {};
@@ -19,12 +21,17 @@ export default function BrowseContaier({ slides }) {
     useEffect(() => {
         const timeout = setTimeout(() => {
             setLoading(false);
-        }, 3000);
+        }, 1000);
 
         return function cleanup() {
             clearTimeout(timeout);
         };
     }, [profile.displayName]);
+
+    useEffect(() => {
+        setSlideRows(slides[category]);
+        return function cleanup() {};
+    }, [slides, category]);
 
     return profile.displayName ? (
         <>
@@ -41,8 +48,18 @@ export default function BrowseContaier({ slides }) {
                             src={logo}
                             alt="Netflix"
                         />
-                        <Header.TextLink>Series</Header.TextLink>
-                        <Header.TextLink>Films</Header.TextLink>
+                        <Header.TextLink
+                            active={category === 'series'}
+                            onClick={() => setCategory('series')}
+                        >
+                            Series
+                        </Header.TextLink>
+                        <Header.TextLink
+                            active={category === 'films'}
+                            onClick={() => setCategory('films')}
+                        >
+                            Films
+                        </Header.TextLink>
                     </Header.Group>
                     <Header.Group>
                         <Header.Search
@@ -85,6 +102,33 @@ export default function BrowseContaier({ slides }) {
                     <Header.PlayButton>Play</Header.PlayButton>
                 </Header.Feature>
             </Header>
+            <Card.Group>
+                {slideRows.map((slide) => (
+                    <Card key={`${category}-${slide.title.toLowerCase()}`}>
+                        <Card.Title>{slide.title}</Card.Title>
+                        <Card.Entities>
+                            {slide.data.map((item) => (
+                                <Card.Item key={item.id} item={item}>
+                                    <Card.Image
+                                        src={`/images/${category}/${item.genre}/${item.slug}/small.jpg`}
+                                    />
+                                    <Card.Meta>
+                                        <Card.Subtitle>
+                                            {item.title}
+                                        </Card.Subtitle>
+                                        <Card.Text>
+                                            {item.description}
+                                        </Card.Text>
+                                    </Card.Meta>
+                                </Card.Item>
+                            ))}
+                        </Card.Entities>
+                        <Card.Feature category={category}>
+                            <p>Hello</p>
+                        </Card.Feature>
+                    </Card>
+                ))}
+            </Card.Group>
             <FooterContainer />
         </>
     ) : (
