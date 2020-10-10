@@ -31,7 +31,6 @@ export default function BrowseContaier({ slides }) {
 
     useEffect(() => {
         setSlideRows(slides[category]);
-        return function cleanup() {};
     }, [slides, category]);
 
     useEffect(() => {

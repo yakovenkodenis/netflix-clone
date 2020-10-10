@@ -2,10 +2,31 @@
   "name": "netflix",
   "version": "0.1.0",
   "private": true,
+  "jest": {
+    "collectCoverageFrom": [
+      "<rootDir>/src/**/*.js",
+      "!<rootDir>/src/index.js",
+      "!<rootDir>/src/seed.js",
+      "!<rootDir>/src/global-styles.js",
+      "!<rootDir>/src/components/index.js",
+      "!<rootDir>/src/lib/firebase.prod.js",
+      "!<rootDir>/src/hooks/*.js",
+      "!<rootDir>/src/context/*.js"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 90,
+        "functions": 90,
+        "lines": 90,
+        "statements": 90
+      }
+    },
+    "coverageReporters": [
+      "html",
+      "text"
+    ]
+  },
   "dependencies": {
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.3.2",
-    "@testing-library/user-event": "^7.1.2",
     "firebase": "^7.21.1",
     "fuse.js": "^6.4.1",
     "normalize.css": "^8.0.1",
@@ -18,7 +39,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --coverage --watchAll",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -37,6 +58,9 @@
     ]
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.3.2",
+    "@testing-library/user-event": "^7.1.2",
     "@welldone-software/why-did-you-render": "^4.3.2"
   }
 }
