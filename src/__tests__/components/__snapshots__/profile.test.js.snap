@@ -1,0 +1,65 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Profiles /> renders the <Profiles /> with populated data 1`] = `
+<div
+  class="profiles__Container-bxtkkv-0 glIXWo"
+>
+  <h1
+    class="profiles__Title-bxtkkv-1 iIBFxC"
+  >
+    Who's watching?
+  </h1>
+  <ul
+    class="profiles__List-bxtkkv-2 eKtfuL"
+  >
+    <li
+      class="profiles__Item-bxtkkv-6 gumqJc"
+    >
+      <img
+        class="profiles__Picture-bxtkkv-4 izXQyg"
+        data-testid="profile-picture"
+        src="/images/users//images/whatever.jpg.png"
+      />
+      <p
+        class="profiles__Name-bxtkkv-5 laQTyZ"
+      >
+        Test Name
+      </p>
+    </li>
+  </ul>
+  <div
+    class="profiles__User-bxtkkv-3"
+    data-testid="user-stub"
+  />
+</div>
+`;
+
+exports[`<Profiles /> renders the <Profiles /> with populated data but misc profile image 1`] = `
+<div
+  class="profiles__Container-bxtkkv-0 glIXWo"
+>
+  <h1
+    class="profiles__Title-bxtkkv-1 iIBFxC"
+  >
+    Who's watching?
+  </h1>
+  <ul
+    class="profiles__List-bxtkkv-2 eKtfuL"
+  >
+    <li
+      class="profiles__Item-bxtkkv-6 gumqJc"
+    >
+      <img
+        class="profiles__Picture-bxtkkv-4 izXQyg"
+        data-testid="profile-picture-misc"
+        src="/images/misc/loading.gif"
+      />
+      <p
+        class="profiles__Name-bxtkkv-5 laQTyZ"
+      >
+        Test Name
+      </p>
+    </li>
+  </ul>
+</div>
+`;
